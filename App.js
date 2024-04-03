@@ -1,11 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import Chat from './components/Chat/chat';
 
 export default function App() {
+  const [isVisible, setVisibility] = useState(false);
+  const [rooms, updateRooms] = useState([]);
+  const [room, updateRoom] = useState('');
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <StatusBar style='auto' backgroundColor="transparent" />
+      <Button title='press' onPress={()=> setVisibility(true)} />
+      <Modal visible={isVisible} animationType='slide' presentationStyle='pageSheet'>
+        <Chat fun={setVisibility} />
+      </Modal>
     </View>
   );
 }
@@ -13,8 +22,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    paddingTop: 40,
   },
 });
